@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Cấu hình theme (font chữ) kiểu mới của Tailwind v4 */
+@theme {
+  --font-sans: "Rubik", sans-serif;
+}
+
+body {
+  background-color: #f3f4f6;
+}
