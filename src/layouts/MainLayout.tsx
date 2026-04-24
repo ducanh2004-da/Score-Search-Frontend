@@ -1,21 +1,19 @@
 import { useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
-import { Search, BarChart3, Trophy, Globe, Moon, Menu } from "lucide-react"; // Thêm icon Menu
+import { Search, BarChart3, Trophy, Globe, Moon, Menu } from "lucide-react";
 
 export default function MainLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // State để quản lý việc đóng/mở sidebar trên mobile
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const menuItems = [
-    { path: "/", label: "Tra Cứu", icon: Search },
-    { path: "/report", label: "Phổ Điểm", icon: BarChart3 },
-    { path: "/top10", label: "Top 10", icon: Trophy },
+    { path: "/", label: "Search score", icon: Search },
+    { path: "/report", label: "Score spectrum", icon: BarChart3 },
+    { path: "/top10", label: "Top 10 A", icon: Trophy },
   ];
 
-  // Hàm chuyển trang và tự động đóng menu trên mobile
   const handleNavigation = (path: string) => {
     navigate(path);
     setIsMobileMenuOpen(false); 
@@ -23,9 +21,7 @@ export default function MainLayout() {
 
   return (
     <div className="relative flex h-screen bg-[#f3f4f6] font-sans overflow-hidden">
-      
-      {/* ================= LỚP PHỦ MỜ (OVERLAY) CHO MOBILE ================= */}
-      {/* Chỉ hiện trên mobile khi menu đang mở, click vào để đóng menu */}
+
       {isMobileMenuOpen && (
         <div 
           className="fixed inset-0 bg-black/40 z-40 md:hidden transition-opacity"
@@ -33,10 +29,6 @@ export default function MainLayout() {
         />
       )}
 
-      {/* ================= SIDEBAR ================= */}
-      {/* Thêm transition trượt mượt mà. 
-          Trên Desktop (md:): Luôn relative và không bị dịch chuyển (translate-x-0).
-          Trên Mobile: Dùng absolute/fixed, đóng thì trượt ra ngoài (-translate-x-full), mở thì trượt vào (translate-x-0) */}
       <aside 
         className={`fixed inset-y-0 left-0 z-50 w-28 flex flex-col items-center py-6 border-r border-gray-200 bg-[#f3f4f6] shrink-0 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
@@ -83,13 +75,11 @@ export default function MainLayout() {
         </div>
       </aside>
 
-      {/* ================= MAIN CONTENT ================= */}
       <div className="flex-1 flex flex-col h-full overflow-y-auto w-full">
 
         <header className="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-gray-200 px-4 sm:px-8 py-4 shrink-0">
           <div className="flex items-center gap-3">
             
-            {/* Nút Hamburger chỉ hiện trên Mobile (md:hidden) */}
             <button 
               className="md:hidden p-2 -ml-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
               onClick={() => setIsMobileMenuOpen(true)}
@@ -111,11 +101,11 @@ export default function MainLayout() {
 
         <footer className="shrink-0 border-t border-gray-200 bg-white px-4 sm:px-8 py-6">
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500 gap-4 sm:gap-0 text-center sm:text-left">
-            <p>&copy; {new Date().getFullYear()} G-Scores. Đã đăng ký bản quyền.</p>
+            <p>&copy; {new Date().getFullYear()} G-Scores. All rights reserve.</p>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-              <button className="hover:text-[#2E4F42] transition-colors font-medium">Điều khoản</button>
-              <button className="hover:text-[#2E4F42] transition-colors font-medium">Quyền riêng tư</button>
-              <button className="hover:text-[#2E4F42] transition-colors font-medium">Liên hệ</button>
+              <button className="hover:text-[#2E4F42] transition-colors font-medium">Policies</button>
+              <button className="hover:text-[#2E4F42] transition-colors font-medium">Private</button>
+              <button className="hover:text-[#2E4F42] transition-colors font-medium">Contact</button>
             </div>
           </div>
         </footer>

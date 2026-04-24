@@ -1,10 +1,9 @@
 import React, { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import { PageSkeleton } from '../components/PageSkeleton'; // Bạn giữ nguyên component skeleton của bạn
+import { PageSkeleton } from '../components/PageSkeleton'; 
 import MainLayout from '../layouts/MainLayout';
-import ErrorBoundary from '../layouts/ErrorLayout'; // Giữ nguyên error layout của bạn
+import ErrorBoundary from '../layouts/ErrorLayout';
 
-// Khai báo Lazy load cho các trang để tối ưu tốc độ load web
 const Pages = {
   Main: {
     Search: lazy(() => import('../pages/SearchScore')),
@@ -13,7 +12,6 @@ const Pages = {
   },
 };
 
-// Hàm bọc giao diện chờ
 const withSuspense = (Element: any) => (
   <Suspense fallback={<PageSkeleton />}>{<Element />}</Suspense>
 );
@@ -22,19 +20,19 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
-    errorElement: <ErrorBoundary />, // Bắt lỗi giao diện ở cấp cao nhất
+    errorElement: <ErrorBoundary />, 
     children: [
       { 
         index: true, 
-        element: withSuspense(Pages.Main.Search) // Trang chủ: Tra cứu
+        element: withSuspense(Pages.Main.Search)
       },
       {
         path: 'report',
-        element: withSuspense(Pages.Main.Report) // Trang Phổ điểm
+        element: withSuspense(Pages.Main.Report) 
       },
       {
         path: 'top10',
-        element: withSuspense(Pages.Main.Top10) // Trang Top 10
+        element: withSuspense(Pages.Main.Top10) 
       }
     ],
   },
