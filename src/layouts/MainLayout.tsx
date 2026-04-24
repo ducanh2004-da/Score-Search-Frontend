@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
-import { Search, BarChart3, Trophy, Globe, Moon, Menu } from "lucide-react";
+import { Search, BarChart3, Trophy, Globe, Moon, Menu, Home } from "lucide-react";
 
 export default function MainLayout() {
   const navigate = useNavigate();
@@ -9,7 +9,8 @@ export default function MainLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const menuItems = [
-    { path: "/", label: "Search score", icon: Search },
+    { path: "/", label: "Dashboard", icon: Home }, 
+    { path: "/search", label: "Search score", icon: Search },
     { path: "/report", label: "Score spectrum", icon: BarChart3 },
     { path: "/top10", label: "Top 10 A", icon: Trophy },
   ];
