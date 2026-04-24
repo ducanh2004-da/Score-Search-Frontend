@@ -14,7 +14,7 @@ export default function SearchScore() {
     setScoreData(null);
 
     if (sbd.trim().length !== 8) {
-      setError("Vui lòng nhập đúng số báo danh gồm 8 chữ số.");
+      setError("input your registration number:");
       return;
     }
 
@@ -24,10 +24,10 @@ export default function SearchScore() {
       if (result.isSuccess && result.score.length > 0) {
         setScoreData(result.score[0]);
       } else {
-        setError(result.message || "Không tìm thấy dữ liệu điểm thi.");
+        setError(result.message || "can not find the data");
       }
     } catch (err: any) {
-      setError(err.message || "Lỗi kết nối đến máy chủ.");
+      setError(err.message || "Error in accessing server");
     } finally {
       setLoading(false);
     }
@@ -35,12 +35,12 @@ export default function SearchScore() {
 
   return (
     <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Tra cứu điểm thi THPT</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Search for score</h2>
       
       <form onSubmit={handleSearch} className="flex gap-3 mb-8">
         <input
           type="text"
-          placeholder="Nhập số báo danh (VD: 01000001)..."
+          placeholder="Input your registration number(EXP: 01000001)..."
           value={sbd}
           onChange={(e) => setSbd(e.target.value)}
           className="flex-1 px-5 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-[#2E4F42] focus:border-transparent outline-none transition-all"
@@ -51,7 +51,7 @@ export default function SearchScore() {
           className="bg-[#2E4F42] text-white px-6 md:px-8 py-3 rounded-2xl hover:bg-[#1f362d] flex items-center gap-2 transition-colors disabled:opacity-70"
         >
           {loading ? <Loader2 size={20} className="animate-spin" /> : <Search size={20} />}
-          <span className="hidden md:inline">{loading ? 'Đang tìm...' : 'Tra cứu'}</span>
+          <span className="hidden md:inline">{loading ? 'Finding...' : 'Search'}</span>
         </button>
       </form>
 
@@ -67,7 +67,7 @@ export default function SearchScore() {
       {scoreData && (
         <div className="animate-fade-in-up">
           <h3 className="text-lg font-semibold text-gray-700 mb-4">
-            Kết quả của SBD: <span className="text-[#2E4F42]">{scoreData.sbd}</span>
+            Score of the student: <span className="text-[#2E4F42]">{scoreData.sbd}</span>
           </h3>
           <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-sm">
             <div className="overflow-x-auto">
